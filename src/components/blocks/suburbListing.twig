@@ -1,0 +1,15 @@
+
+{# set vars #}
+
+{# get vars #}
+
+{# MARKUP #}
+<div class="container-fluid py-5">
+  <div class="container">
+    <div class="row">
+      {% for item in self.suburbs.all() %}
+        {% include '_teasers/suburb' with {self:item} %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

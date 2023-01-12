@@ -1,0 +1,21 @@
+
+
+<div class="container-fluid bg-{{ self.backgroundColour }}">
+  <div class="container py-5">
+    <div class="row mb-3">
+      <div class="col-12 ">
+        {{ self.heading|raw }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
+        {{ self.freeform().render({
+          class: "form",
+        	labelClass: "form-label",
+        	inputClass: "form-control",
+        	instructionsBelowField: true
+        }) }}
+      </div>
+    </div>
+  </div>
+</div>

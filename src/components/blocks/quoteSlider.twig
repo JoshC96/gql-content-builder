@@ -1,0 +1,38 @@
+{% import '_macros/images' as imageFunc %}
+
+{# set vars #}
+
+{% set backgroundImage = "" %}
+{% set backgroundColour = '' %}
+
+{# get vars #}
+{% set backgroundImage = self.backgroundImage.one() %}
+{% set backgroundColour = self.backgroundColour %}
+
+{# MARKUP #}
+
+<div class="container-fluid fx-tint quotes py-5 bg-{{backgroundColour}}">
+  {% if backgroundImage != '' %}
+    {% spaceless %} {{ imageFunc.parallax_image(backgroundImage) }}{% endspaceless %}
+  {% endif %}
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-12 col-md-10 offset-md-1">
+        <h3 class="text-center mb-4">{{ self.heading }}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-10 offset-md-1">
+        <div class="row quote-slider fx-slick-arrows-white fx-slick-dots-white">
+          {% for item in self.quote.all() %}
+            <div class="col-12 text-center">
+              <p class="quote-text">{{ item.quoteText }}</p>
+              <p class="quote-author">{{ item.author }}</p>
+              <p class="quote-date">{{ item.date }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+
+{# set vars #}
+
+{% set type = self.listingType %}
+{% set limit = self.limit|default(6) %}
+{% set displayOrder = self.displayOrder|default('title asc') %}
+
+{# get vars #}
+{% set listings = craft.entries.section(type).orderBy(displayOrder).limit(limit) %}
+
+
+{# MARKUP #}
+{% if listings|length %}
+  <div class="container-fluid bg-{{self.backgroundColour}} py-5">
+    <div class="container">
+      {% if self.heading != '' %}
+      <div class="row">
+        <div class="col-12">
+          <h2 class="mb-2">{{ self.heading }}</h2>
+        </div>
+      </div>
+      {% endif %}
+      <div class="row">
+        {% for item in listings.all() %}
+          {% include '_teasers/' ~ self.listingType with {self:item} %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}

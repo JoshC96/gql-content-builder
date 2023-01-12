@@ -1,0 +1,57 @@
+{#
+  SET VARS
+#}
+{% set width = self.width %}
+
+{#
+  MARKUP
+#}
+
+{% if width == "natural" %}
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-10 offset-md-1">
+          <div id="map" style="height: 350px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% elseif width == "containerWidth" %}
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+          <div id="map" style="height: 350px;"></div>
+          <div class="col-12">
+        </div>
+      </div>
+    </div>
+  </div>
+{% elseif width == "fullPage" %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 px-0">
+        <div id="map" style="height: 350px;"></div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+
+
+
+<script>
+  function myMap() {
+    var myLatLng = new google.maps.LatLng({{ self.location|default("-34.8750716, 138.5455018") }});
+    var mapOptions = {
+      center: myLatLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      zoomControl: true
+    }
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    var marker = new google.maps.Marker({position: myLatLng, title: ""});
+    marker.setMap(map);
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ general.googleMapsApiKey }}&callback=myMap"></script>

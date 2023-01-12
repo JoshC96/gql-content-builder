@@ -1,0 +1,19 @@
+
+{# set vars #}
+
+{# get vars #}
+{% set jobs = craft.entries.section("jobs").relatedTo(self.suburb).all() %}
+
+
+{# MARKUP #}
+{% if jobs|length %}
+  <div class="container-fluid bg-grey py-5">
+    <div class="container">
+      <div class="row">
+        {% for item in jobs %}
+          {% include '_teasers/pages' with {self:item} %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
